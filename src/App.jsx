@@ -1,12 +1,17 @@
 import { useState } from 'react'
+import Header from './components/Header/Header'
+import Recipes from './components/Recipes/Recipes'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Counter</h1>
-    </>
+    <section className=" w-full md:w-[1100px] mx-auto">
+      <Header></Header>
+      <Recipes></Recipes>
+    </section>
+
+
   )
 }
 
