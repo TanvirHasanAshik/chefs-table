@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <section className=" w-full md:w-[1100px] mx-auto">
+    <section className=" w-full container mx-auto">
       <Header></Header>
       <Recipes></Recipes>
     </section>
