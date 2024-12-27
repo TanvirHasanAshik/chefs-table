@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
     const [wantCooks, setWantCooks] = useState([]);
+    const [preparingCooks, setPreparingCooks] = useState([]);
 
     useEffect(() => {
         fetch('fake_data.json')
@@ -16,13 +17,26 @@ const Recipes = () => {
 
     const handleCook = (recipe) => {
         const findCook = wantCooks.find(cook => cook.recipe_id === recipe.recipe_id);
-        if (!findCook) {
+        const findPreparingCook = preparingCooks.find(cook => cook.recipe_id === recipe.recipe_id);
+
+        if (!findCook && !findPreparingCook) {
             const newCooks = [...wantCooks, recipe];
             setWantCooks(newCooks);
         } else {
             alert('Already added to cooking list');
         }
     };
+
+    const handlePreparingCook = (recipe) => {
+        const findPreparingCook = preparingCooks.find(cook => cook.recipe_id === recipe.recipe_id);
+        if (!findPreparingCook) {
+            const newCooks = [...preparingCooks, recipe];
+            setPreparingCooks(newCooks);
+            const newWantCooks = wantCooks.filter(cook => cook.recipe_id !== recipe.recipe_id);
+            setWantCooks(newWantCooks);
+
+        }
+    }
 
     return (
         <div className="text-center my-20">
@@ -40,7 +54,7 @@ const Recipes = () => {
                         />)
                     }
                 </div>
-                <CookingTable wantCooks={wantCooks}></CookingTable>
+                <CookingTable preparingCooks={preparingCooks} handlePreparingCook={handlePreparingCook} wantCooks={wantCooks}></CookingTable>
             </div>
         </div>
     );
