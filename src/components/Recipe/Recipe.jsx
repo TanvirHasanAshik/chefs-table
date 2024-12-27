@@ -1,8 +1,8 @@
 import { FaHandHolding } from "react-icons/fa";
 import { IoMdTime } from "react-icons/io";
 import { FaFire } from "react-icons/fa";
-const Recipe = ({ recipe }) => {
-    console.log(recipe);
+const Recipe = ({ recipe, handleCook }) => {
+
     const { recipe_image, recipe_name, short_description, ingredients, preparing_time, calories } = recipe;
     return (
         <div className=" card bg-base-100 border border-base-200 rounded-xl">
@@ -26,7 +26,10 @@ const Recipe = ({ recipe }) => {
                     <p className="flex items-center gap-2"><FaFire />{calories} calories</p>
                 </div>
                 <div className="card-actions">
-                    <button className="btn btn-warning rounded-badge mt-2">Want to cook</button>
+                    <button
+                        onClick={() => handleCook(recipe)}
+                        className="btn btn-warning rounded-badge mt-2
+                    ">Want to cook</button>
                 </div>
             </div>
         </div>
